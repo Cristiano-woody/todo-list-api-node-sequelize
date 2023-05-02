@@ -11,9 +11,6 @@ export const tasksEntity = PostgresDataSource.define<tasksInterface>('tasks', {
   done: {
     type: DataTypes.STRING
   },
-  date_criation: {
-    type: DataTypes.STRING
-  },
   description: {
     type: DataTypes.STRING
   },
