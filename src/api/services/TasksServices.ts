@@ -12,6 +12,18 @@ class TasksService {
     })
     return tasks
   }
+
+  async getAll (): Promise<tasksInterface[]> {
+    const allTasks = await tasksEntity.findAll()
+    return allTasks
+  }
+
+  async getTasksById (req: Request): Promise<tasksInterface | undefined> {
+    const tasks = await tasksEntity.findByPk(parseInt(req.query.id as string))
+    if (tasks != null) {
+      return tasks
+    }
+  }
 }
 
 export default TasksService
