@@ -24,6 +24,27 @@ class TasksService {
       return tasks
     }
   }
+
+  async updateByID (req: Request): Promise<tasksInterface | undefined> {
+    const results = await tasksEntity.findByPk(parseInt(req.query.id as string))
+    if (results !== null && results !== undefined) {
+      const tasks = results
+      if (req.body.title !== undefined) {
+        tasks.title = req.body.title
+      }
+      if (req.body.description !== undefined) {
+        tasks.description = req.body.description
+      }
+      if (req.body.done !== undefined) {
+        tasks.done = req.body.done
+      }
+
+      if (req.body.title !== undefined || req.body.description !== undefined || req.body.done !== undefined) {
+        await tasks.save()
+        return tasks
+      }
+    }
+  }
 }
 
 export default TasksService
