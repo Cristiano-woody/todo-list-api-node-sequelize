@@ -5,7 +5,7 @@ interface tasksInterface extends Model {
   done: boolean
   date_criation: string
   description: string
-  name: string
+  title: string
 }
 
 export default tasksInterface
