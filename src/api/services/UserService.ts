@@ -54,7 +54,7 @@ class UserService {
           id: user.id
         }
       })
-      return undefined
+      return user
     }
   }
 }

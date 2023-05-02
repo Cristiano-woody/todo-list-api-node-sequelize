@@ -54,7 +54,7 @@ class TasksService {
           id: task.id
         }
       })
-      return undefined
+      return task
     }
   }
 }
