@@ -54,8 +54,23 @@ class TasksController {
         res.status(400).send('Usuário não encontrado')
       }
     } catch (error) {
-      console.log(error)
       void logService.crete('updateByID: erro na requisição', req)
+      res.status(400).send('requisicão inválida')
+    }
+  }
+
+  async deleteTasksBy (req: Request, res: Response): Promise<void> {
+    try {
+      const task = await tasksService.deleteByID(req)
+      if (task !== undefined && task !== null) {
+        void logService.crete(`deleteById: ${JSON.stringify(task)}`, req)
+        res.status(200).json(`Usuário: ${task.title} deletado.`)
+      } else {
+        void logService.crete('deleteById: usuário não encontrado', req)
+        res.status(400).send('Usuário não encontrado')
+      }
+    } catch (error) {
+      void logService.crete('deleteById: erro na requisição', req)
       res.status(400).send('requisicão inválida')
     }
   }
