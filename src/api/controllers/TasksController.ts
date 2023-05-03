@@ -42,6 +42,23 @@ class TasksController {
       res.status(400).send('getAllTasks: erro na requisição')
     }
   }
+
+  async updateByID (req: Request, res: Response): Promise<void> {
+    try {
+      const task = await tasksService.updateByID(req)
+      if (task !== undefined && task !== null) {
+        void logService.crete(`update task by id: ${JSON.stringify(task)}`, req)
+        res.status(200).json(task)
+      } else {
+        void logService.crete('updateByID: usuario não encontrado', req)
+        res.status(400).send('Usuário não encontrado')
+      }
+    } catch (error) {
+      console.log(error)
+      void logService.crete('updateByID: erro na requisição', req)
+      res.status(400).send('requisicão inválida')
+    }
+  }
 }
 
 export default TasksController
