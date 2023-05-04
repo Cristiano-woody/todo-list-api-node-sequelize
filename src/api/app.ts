@@ -1,6 +1,6 @@
 import express from 'express'
 // importando rotas
-import MainRoutes from './routes/mainRoutes'
+import userRoutes from './routes/userRoutes'
 // importando .env
 import * as dotenv from 'dotenv'
 // importando cors
@@ -19,6 +19,6 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 // usando rotas
-app.use(MainRoutes)
+app.use(userRoutes)
 
 export default app

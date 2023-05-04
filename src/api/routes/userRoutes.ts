@@ -16,7 +16,5 @@ router.delete('/user/:id', (req: Request, res: Response) => { void userControlle
 
 //
 //
-//
-//
 
 export default router
