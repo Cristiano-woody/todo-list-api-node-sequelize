@@ -34,7 +34,7 @@ class TasksController {
 
   async getAllTasks (req: Request, res: Response): Promise<void> {
     try {
-      const allTasks = tasksService.getAll()
+      const allTasks = await tasksService.getAll()
       void logService.crete('get all tasks', req)
       res.status(200).json(allTasks)
     } catch (error) {
