@@ -1,21 +1,34 @@
 import { type Request, type Response } from 'express'
 import LogService from '../services/LogService'
 import TasksService from '../services/TasksService'
+import TaskValidator from '../validators/TaskValidator'
 
 const tasksService = new TasksService()
 const logService = new LogService()
+const taskValidator = new TaskValidator()
 
 class TasksController {
   //
   async createTask (req: Request, res: Response): Promise<void> {
     try {
+      const valid = await taskValidator.CreateTaskValidator(req.body)
+      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+      if (!valid) {
+        res.status(400).send('parametros inválidos')
+        return
+      }
+
       const task = await tasksService.createTasks(req)
+      if (typeof task !== 'object') {
+        res.status(400).send('erro ao registrar no')
+      }
+
       void logService.crete(`create task: ${JSON.stringify(task)}`, req)
       res.status(201).json(task)
+      //
     } catch (error) {
-      console.log(error)
       void logService.crete('create task: erro na requisição', req)
-      res.status(400).send('requisićão inválida')
+      res.status(400).send(error)
     }
   }
 

@@ -1,17 +1,17 @@
-class TaskValidator {
-  async CreateTaskValidator (req: any): Promise<string[]> {
-    const errors: string[] = []
 
+class TaskValidator {
+  async CreateTaskValidator (req: { descriptiom: string, done: boolean, title: string }): Promise<boolean> {
+    //
     if (req === null || req === undefined || typeof req !== 'object') {
-      errors.push('Entrada inválida.')
+      return false
     }
     if (req.title === null || req.title === undefined) {
-      errors.push('Parametro Título é obrigatório')
+      return false
     }
     if (req.done === null || req.done === undefined) {
-      errors.push('Parametro done é obrigatório')
+      return false
     }
-    return errors
+    return true
   }
 }
 
