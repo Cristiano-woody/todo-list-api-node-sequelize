@@ -1,6 +1,7 @@
 import express from 'express'
 // importando rotas
 import userRoutes from './routes/userRoutes'
+import tasksRoutes from './routes/tasksRoutes'
 // importando .env
 import * as dotenv from 'dotenv'
 // importando cors
@@ -20,5 +21,6 @@ app.use(express.json())
 
 // usando rotas
 app.use(userRoutes)
+app.use(tasksRoutes)
 
 export default app
