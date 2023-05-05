@@ -4,11 +4,12 @@ import type tasksInterface from '../interfaces/tasksInterface'
 
 class TasksService {
   //
-  async createTasks (req: Request): Promise<tasksInterface> {
+  async CreateTasks (req: Request): Promise<tasksInterface> {
+    const { title, description, done } = req.body
     const tasks = await tasksEntity.create({
-      title: `${req.body.title as string}`,
-      description: `${req.body.description as string}`,
-      done: req.body.done as boolean
+      title: title as string,
+      description: description as string,
+      done: done as boolean
     })
     return tasks
   }

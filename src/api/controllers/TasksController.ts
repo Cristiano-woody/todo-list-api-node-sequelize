@@ -19,7 +19,7 @@ class TasksController {
         return
       }
 
-      const task = await tasksService.createTasks(req)
+      const task = await tasksService.CreateTasks(req)
       if (typeof task !== 'object') {
         void logService.crete('create task: errro ao registrar no banco', req)
         res.status(400).send('create task: errro ao registrar no banco')
