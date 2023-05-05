@@ -14,13 +14,16 @@ class TasksController {
       const valid = await taskValidator.CreateTaskValidator(req.body)
       // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
       if (!valid) {
-        res.status(400).send('parametros inválidos')
+        void logService.crete('create task: parametros inválidos', req)
+        res.status(400).send('create task: parametros inválidos')
         return
       }
 
       const task = await tasksService.createTasks(req)
       if (typeof task !== 'object') {
-        res.status(400).send('erro ao registrar no')
+        void logService.crete('create task: errro ao registrar no banco', req)
+        res.status(400).send('create task: errro ao registrar no banco')
+        return
       }
 
       void logService.crete(`create task: ${JSON.stringify(task)}`, req)
