@@ -19,11 +19,9 @@ class TasksService {
     return allTasks
   }
 
-  async getTasksById (req: Request): Promise<tasksInterface | undefined> {
+  async getTasksById (req: Request): Promise<tasksInterface | null> {
     const tasks = await tasksEntity.findByPk(parseInt(req.query.id as string))
-    if (tasks != null) {
-      return tasks
-    }
+    return tasks
   }
 
   async updateByID (req: Request): Promise<tasksInterface | undefined> {
