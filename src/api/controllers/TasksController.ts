@@ -37,11 +37,23 @@ class TasksController {
 
   async getTaskByID (req: Request, res: Response): Promise<void> {
     try {
-      const task = await tasksService.getTasksById(req)
-      if (task !== undefined && task !== null) {
-        void logService.crete(`get task by ID: ${JSON.stringify(task)}`, req)
-        res.status(200).json(task)
+      const validate = await taskValidator.GetTaskByIDValidator(req)
+      if (!validate) {
+        void logService.crete('get tasks by id: erro na requisição', req)
+        res.status(400).send('requisićão inválida')
+        return
       }
+
+      const task = await tasksService.getTasksById(req)
+      if (task === undefined || task === null) {
+        void logService.crete('get tasks by id: task inexistente', req)
+        res.status(400).send('get tasks by id: task inexistente')
+        return
+      }
+
+      void logService.crete(`get task by ID: ${JSON.stringify(task)}`, req)
+      res.status(200).json(task)
+      //
     } catch (error) {
       void logService.crete('get tasks by id: erro na requisição', req)
       res.status(400).send('requisićão inválida')
