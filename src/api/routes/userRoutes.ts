@@ -4,7 +4,7 @@ import UserController from '../controllers/USerController'
 const router = Express.Router()
 const userController = new UserController()
 
-router.post('/user', (req: Request, res: Response) => { void userController.create(req, res) })
+router.post('/user', (req: Request, res: Response) => { void userController.CreateUser(req, res) })
 
 router.get('/user', (req: Request, res: Response) => { void userController.getAll(req, res) })
 

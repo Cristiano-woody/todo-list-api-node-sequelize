@@ -5,7 +5,7 @@ import getDateNow from '../../helpers/getDateNow'
 
 class LogService {
   //
-  async crete (messagelog: string, req: Request): Promise<void> {
+  async CreateLog (messagelog: string, req: Request): Promise<void> {
     const datenow = getDateNow()
     await logEntity.create({
       message: `${messagelog}`,
