@@ -63,8 +63,10 @@ class TasksController {
   async getAllTasks (req: Request, res: Response): Promise<void> {
     try {
       const allTasks = await tasksService.getAll()
-      void logService.crete('get all tasks', req)
-      res.status(200).json(allTasks)
+      if (allTasks !== null || allTasks !== undefined) {
+        void logService.crete('get all tasks', req)
+        res.status(200).json(allTasks)
+      }
     } catch (error) {
       void logService.crete('getAllTasks: erro na requisição', req)
       res.status(400).send('getAllTasks: erro na requisição')
