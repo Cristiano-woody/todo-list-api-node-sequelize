@@ -14,23 +14,23 @@ class TasksController {
       const valid = await taskValidator.CreateTaskValidator(req.body)
       // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
       if (!valid) {
-        void logService.crete('create task: parametros inválidos', req)
+        void logService.CreateLog('create task: parametros inválidos', req)
         res.status(400).send('create task: parametros inválidos')
         return
       }
 
       const task = await tasksService.CreateTasks(req)
       if (typeof task !== 'object') {
-        void logService.crete('create task: errro ao registrar no banco', req)
+        void logService.CreateLog('create task: errro ao registrar no banco', req)
         res.status(400).send('create task: errro ao registrar no banco')
         return
       }
 
-      void logService.crete(`create task: ${JSON.stringify(task)}`, req)
+      void logService.CreateLog(`create task: ${JSON.stringify(task)}`, req)
       res.status(201).json(task)
       //
     } catch (error) {
-      void logService.crete('create task: erro na requisição', req)
+      void logService.CreateLog('create task: erro na requisição', req)
       res.status(400).send(error)
     }
   }
@@ -39,23 +39,23 @@ class TasksController {
     try {
       const validate = await taskValidator.GetTaskByIDValidator(req)
       if (!validate) {
-        void logService.crete('get tasks by id: erro na requisição', req)
+        void logService.CreateLog('get tasks by id: erro na requisição', req)
         res.status(400).send('requisićão inválida')
         return
       }
 
       const task = await tasksService.getTasksById(req)
       if (task === undefined || task === null) {
-        void logService.crete('get tasks by id: task inexistente', req)
+        void logService.CreateLog('get tasks by id: task inexistente', req)
         res.status(400).send('get tasks by id: task inexistente')
         return
       }
 
-      void logService.crete(`get task by ID: ${JSON.stringify(task)}`, req)
+      void logService.CreateLog(`get task by ID: ${JSON.stringify(task)}`, req)
       res.status(200).json(task)
       //
     } catch (error) {
-      void logService.crete('get tasks by id: erro na requisição', req)
+      void logService.CreateLog('get tasks by id: erro na requisição', req)
       res.status(400).send('requisićão inválida')
     }
   }
@@ -64,11 +64,11 @@ class TasksController {
     try {
       const allTasks = await tasksService.getAll()
       if (allTasks !== null || allTasks !== undefined) {
-        void logService.crete('get all tasks', req)
+        void logService.CreateLog('get all tasks', req)
         res.status(200).json(allTasks)
       }
     } catch (error) {
-      void logService.crete('getAllTasks: erro na requisição', req)
+      void logService.CreateLog('getAllTasks: erro na requisição', req)
       res.status(400).send('getAllTasks: erro na requisição')
     }
   }
@@ -77,14 +77,14 @@ class TasksController {
     try {
       const task = await tasksService.updateByID(req)
       if (task !== undefined && task !== null) {
-        void logService.crete(`update task by id: ${JSON.stringify(task)}`, req)
+        void logService.CreateLog(`update task by id: ${JSON.stringify(task)}`, req)
         res.status(200).json(task)
       } else {
-        void logService.crete('updateByID: usuario não encontrado', req)
+        void logService.CreateLog('updateByID: usuario não encontrado', req)
         res.status(400).send('Usuário não encontrado')
       }
     } catch (error) {
-      void logService.crete('updateByID: erro na requisição', req)
+      void logService.CreateLog('updateByID: erro na requisição', req)
       res.status(400).send('requisicão inválida')
     }
   }
@@ -93,14 +93,14 @@ class TasksController {
     try {
       const task = await tasksService.deleteByID(req)
       if (task !== undefined && task !== null) {
-        void logService.crete(`deleteById: ${JSON.stringify(task)}`, req)
+        void logService.CreateLog(`deleteById: ${JSON.stringify(task)}`, req)
         res.status(200).json(`Usuário: ${task.title} deletado.`)
       } else {
-        void logService.crete('deleteById: usuário não encontrado', req)
+        void logService.CreateLog('deleteById: usuário não encontrado', req)
         res.status(400).send('Usuário não encontrado')
       }
     } catch (error) {
-      void logService.crete('deleteById: erro na requisição', req)
+      void logService.CreateLog('deleteById: erro na requisição', req)
       res.status(400).send('requisicão inválida')
     }
   }
