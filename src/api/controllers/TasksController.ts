@@ -31,7 +31,7 @@ class TasksController {
       //
     } catch (error) {
       void logService.CreateLog('create task: erro na requisição', req)
-      res.status(400).send(error)
+      res.status(500).send('erro na requisição')
     }
   }
 
@@ -56,7 +56,7 @@ class TasksController {
       //
     } catch (error) {
       void logService.CreateLog('get tasks by id: erro na requisição', req)
-      res.status(400).send('requisićão inválida')
+      res.status(500).send('erro na requisição')
     }
   }
 
@@ -69,7 +69,7 @@ class TasksController {
       }
     } catch (error) {
       void logService.CreateLog('getAllTasks: erro na requisição', req)
-      res.status(400).send('getAllTasks: erro na requisição')
+      res.status(500).send('erro na requisição')
     }
   }
 
@@ -81,11 +81,11 @@ class TasksController {
         res.status(200).json(task)
       } else {
         void logService.CreateLog('updateByID: usuario não encontrado', req)
-        res.status(400).send('Usuário não encontrado')
+        res.status(404).send('Usuário não encontrado')
       }
     } catch (error) {
       void logService.CreateLog('updateByID: erro na requisição', req)
-      res.status(400).send('requisicão inválida')
+      res.status(500).send('erro na requisição')
     }
   }
 
@@ -97,11 +97,11 @@ class TasksController {
         res.status(200).json(`Usuário: ${task.title} deletado.`)
       } else {
         void logService.CreateLog('deleteById: usuário não encontrado', req)
-        res.status(400).send('Usuário não encontrado')
+        res.status(404).send('Usuário não encontrado')
       }
     } catch (error) {
       void logService.CreateLog('deleteById: erro na requisição', req)
-      res.status(400).send('requisicão inválida')
+      res.status(500).send('erro na requisição')
     }
   }
 }
