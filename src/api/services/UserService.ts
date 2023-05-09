@@ -13,19 +13,19 @@ class UserService {
     return user
   }
 
-  async getAll (): Promise<UserInterface[]> {
+  async GetAllUsers (): Promise<UserInterface[]> {
     const user = await userEntity.findAll()
     return user
   }
 
-  async getById (req: Request): Promise<UserInterface | undefined> {
+  async GetUserById (req: Request): Promise<UserInterface | undefined> {
     const user = await userEntity.findByPk(parseInt(req.query.id as string))
     if (user != null) {
       return user
     }
   }
 
-  async updateByID (req: Request): Promise<UserInterface | undefined> {
+  async UpdateUserById (req: Request): Promise<UserInterface | undefined> {
     const results = await userEntity.findByPk(parseInt(req.query.id as string))
     if (results !== null && results !== undefined) {
       const user = results
@@ -46,7 +46,7 @@ class UserService {
     }
   }
 
-  async deleteByID (req: Request): Promise<UserInterface | undefined | null> {
+  async DeleteUserById (req: Request): Promise<UserInterface | undefined | null> {
     const user = await userEntity.findByPk(parseInt(req.query.id as string))
     if (user !== undefined && user !== null) {
       await userEntity.destroy({
