@@ -12,7 +12,6 @@ class TasksController {
   async createTask (req: Request, res: Response): Promise<void> {
     try {
       const valid = await taskValidator.CreateTaskValidator(req.body)
-      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
       if (!valid) {
         void logService.CreateLog('create task: parametros inválidos', req)
         res.status(400).send('create task: parametros inválidos')
@@ -43,14 +42,12 @@ class TasksController {
         res.status(400).send('requisićão inválida')
         return
       }
-
       const task = await tasksService.getTasksById(req)
       if (task === undefined || task === null) {
         void logService.CreateLog('get tasks by id: task inexistente', req)
         res.status(400).send('get tasks by id: task inexistente')
         return
       }
-
       void logService.CreateLog(`get task by ID: ${JSON.stringify(task)}`, req)
       res.status(200).json(task)
       //
@@ -80,8 +77,8 @@ class TasksController {
         void logService.CreateLog(`update task by id: ${JSON.stringify(task)}`, req)
         res.status(200).json(task)
       } else {
-        void logService.CreateLog('updateByID: usuario não encontrado', req)
-        res.status(404).send('Usuário não encontrado')
+        void logService.CreateLog('task não encontrada', req)
+        res.status(404).send('task não encontrada')
       }
     } catch (error) {
       void logService.CreateLog('updateByID: erro na requisição', req)
