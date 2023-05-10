@@ -10,7 +10,7 @@ class UserController {
   //
   async CreateUser (req: Request, res: Response): Promise<void> {
     try {
-      const user = await userService.CreateUser(req.body)
+      const user = await userService.CreateUser(req)
       void logService.CreateLog(`create user: ${JSON.stringify(user)}`, req)
       res.status(201).json(user)
     } catch (error) {
