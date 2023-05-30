@@ -91,10 +91,10 @@ class TasksController {
       const task = await tasksService.deleteByID(req)
       if (task !== undefined && task !== null) {
         void logService.CreateLog(`deleteById: ${JSON.stringify(task)}`, req)
-        res.status(200).json(`Usuário: ${task.title} deletado.`)
+        res.status(200).json(`Task: ${task.title} deletado.`)
       } else {
         void logService.CreateLog('deleteById: usuário não encontrado', req)
-        res.status(404).send('Usuário não encontrado')
+        res.status(404).send('Task não encontrado')
       }
     } catch (error) {
       void logService.CreateLog('deleteById: erro na requisição', req)
