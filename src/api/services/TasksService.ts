@@ -46,11 +46,11 @@ class TasksService {
   }
 
   async deleteByID (req: Request): Promise<tasksInterface | undefined | null> {
-    const task = await tasksEntity.findByPk(parseInt(req.query.id as string))
+    const task = await tasksEntity.findByPk(parseInt(req.query.title as string))
     if (task !== undefined && task !== null) {
       await tasksEntity.destroy({
         where: {
-          id: task.id
+          title: task.title
         }
       })
       return task
