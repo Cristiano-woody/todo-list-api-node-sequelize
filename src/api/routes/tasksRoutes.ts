@@ -8,7 +8,7 @@ router.post('/task', (req: Request, res: Response) => { void tasksController.cre
 
 router.get('/task', (req: Request, res: Response) => { void tasksController.getAllTasks(req, res) })
 
-router.get('/task/:id', (req: Request, res: Response) => { void tasksController.getTaskByID(req, res) })
+router.get('/task/:title', (req: Request, res: Response) => { void tasksController.getTaskByID(req, res) })
 
 router.patch('/task/:id', (req: Request, res: Response) => { void tasksController.updateByID(req, res) })
 
