@@ -17,7 +17,7 @@ class TaskValidator {
 
   async GetTaskByIDValidator (req: Request): Promise<boolean> {
     //
-    if (req.query.id === null || req.query.id === undefined) {
+    if (req.params.id === null || req.params.id === undefined) {
       return false
     }
     return true

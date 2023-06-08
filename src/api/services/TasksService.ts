@@ -20,12 +20,12 @@ class TasksService {
   }
 
   async getTasksById (req: Request): Promise<tasksInterface | null> {
-    const tasks = await tasksEntity.findByPk(parseInt(req.query.id as string))
+    const tasks = await tasksEntity.findByPk(parseInt(req.params.id))
     return tasks
   }
 
   async updateByID (req: Request): Promise<tasksInterface | undefined> {
-    const results = await tasksEntity.findByPk(parseInt(req.query.id as string))
+    const results = await tasksEntity.findByPk(parseInt(req.params.id))
     if (results !== null && results !== undefined) {
       const tasks = results
       if (req.body.title !== undefined) {
@@ -46,11 +46,11 @@ class TasksService {
   }
 
   async deleteByID (req: Request): Promise<tasksInterface | undefined | null> {
-    const task = await tasksEntity.findByPk(parseInt(req.query.title as string))
+    const task = await tasksEntity.findByPk(parseInt(req.query.id as string))
     if (task !== undefined && task !== null) {
       await tasksEntity.destroy({
         where: {
-          title: task.title
+          id: +task.id
         }
       })
       return task
