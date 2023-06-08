@@ -1,6 +1,7 @@
 import tasksEntity from '../entitys/tasksEntity'
 import { type Request } from 'express'
 import type tasksInterface from '../interfaces/tasksInterface'
+import { Op } from 'sequelize'
 
 class TasksService {
   //
@@ -19,9 +20,18 @@ class TasksService {
     return allTasks
   }
 
-  async getTasksById (req: Request): Promise<tasksInterface | null> {
-    const tasks = await tasksEntity.findByPk(parseInt(req.params.id))
-    return tasks
+  async getTasksById (req: Request): Promise<tasksInterface | tasksInterface[] | undefined> {
+    if (req.query.title !== undefined) {
+      const tasks = await tasksEntity.findAll({
+        where: {
+          title: {
+            // eslint-disable-next-line @typescript-eslint/no-base-to-string, @typescript-eslint/restrict-template-expressions
+            [Op.like]: `%${req.query.title}%`
+          }
+        }
+      })
+      return tasks
+    }
   }
 
   async updateByID (req: Request): Promise<tasksInterface | undefined> {
